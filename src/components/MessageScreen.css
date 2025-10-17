@@ -1,0 +1,213 @@
+/* Mobile-first, full-screen message display with WCAG 2.1 accessibility */
+
+.message-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh; /* Dynamic viewport height per mobile */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+  overflow: hidden;
+  transition: background-color 0.5s ease;
+}
+
+.message-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  max-width: 600px;
+  position: relative;
+  z-index: 1;
+}
+
+.message-text {
+  font-size: clamp(2rem, 8vw, 4rem);
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.35;
+  margin: 0;
+  padding: 2rem 1rem;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  word-wrap: break-word;
+  hyphens: auto;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+  letter-spacing: -0.01em;
+}
+
+.message-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  padding-bottom: 2rem;
+}
+
+.next-button,
+.restart-button {
+  font-size: 1.25rem;
+  font-weight: 700;
+  padding: 1rem 3rem;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  min-width: 200px;
+  min-height: 56px; /* WCAG 2.1 AAA: minimum touch target 44x44px, usando 56px per maggiore accessibilità */
+  font-family: inherit;
+}
+
+.next-button,
+.restart-button {
+  font-size: 1.25rem;
+  font-weight: 700;
+  padding: 1rem 3rem;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  min-width: 200px;
+  min-height: 56px; /* WCAG 2.1 AAA: minimum touch target 44x44px, usando 56px per maggiore accessibilità */
+  font-family: inherit;
+}
+
+.next-button:hover,
+.restart-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.next-button:active,
+.restart-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Focus visibile per accessibilità keyboard (WCAG 2.1) */
+.next-button:focus,
+.restart-button:focus {
+  outline: 3px solid currentColor;
+  outline-offset: 4px;
+}
+
+.next-button:focus:not(:focus-visible),
+.restart-button:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.next-button:focus-visible,
+.restart-button:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 4px;
+}
+
+.end-message-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.end-message {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin: 0;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Ottimizzazioni per dispositivi touch */
+@media (hover: none) and (pointer: coarse) {
+  .next-button,
+  .restart-button {
+    /* Aumenta l'area touch su mobile */
+    min-height: 60px;
+    padding: 1.25rem 3.5rem;
+  }
+}
+
+/* Landscape mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+  .message-text {
+    font-size: clamp(1.5rem, 6vw, 2.5rem);
+    padding: 1rem;
+  }
+  
+  .message-footer {
+    gap: 1rem;
+    padding-bottom: 1rem;
+  }
+  
+  .next-button,
+  .restart-button {
+    min-height: 48px;
+    padding: 0.75rem 2.5rem;
+    font-size: 1.125rem;
+  }
+}
+
+/* Riduzione movimento per utenti con preferenze (WCAG 2.1) */
+@media (prefers-reduced-motion: reduce) {
+  .message-screen,
+  .next-button,
+  .restart-button,
+  .end-message {
+    transition: none;
+    animation: none;
+  }
+  
+  .next-button:hover,
+  .restart-button:hover {
+    transform: none;
+  }
+  
+  .next-button:active,
+  .restart-button:active {
+    transform: none;
+  }
+}
+
+/* Dark mode support (mantiene i colori dell'app ma rispetta le preferenze) */
+@media (prefers-color-scheme: dark) {
+  .next-button,
+  .restart-button {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  }
+}

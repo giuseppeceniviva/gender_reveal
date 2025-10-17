@@ -1,0 +1,69 @@
+/* Reset e impostazioni base per l'applicazione mobile-first */
+:root {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 
+    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  
+  /* Ottimizzazione rendering font */
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+  /* Disabilita selezione testo su mobile per migliore UX */
+  -webkit-user-select: none;
+  user-select: none;
+  
+  /* Disabilita callout su iOS */
+  -webkit-touch-callout: none;
+}
+
+/* Font custom per un look dolce e moderno */
+.font-quicksand {
+  font-family: 'Quicksand', sans-serif;
+}
+
+.font-poppins {
+  font-family: 'Poppins', sans-serif;
+}
+
+.font-nunito {
+  font-family: 'Nunito', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  /* Previene bounce scroll su iOS */
+  overscroll-behavior: none;
+  
+  /* Previene zoom su double-tap su iOS */
+  touch-action: manipulation;
+}
+
+/* Supporto per riduzione movimento (WCAG 2.1) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
