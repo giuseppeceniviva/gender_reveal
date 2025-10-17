@@ -72,6 +72,10 @@
   letter-spacing: -0.01em;
 }
 
+.message-text-with-description {
+  flex-direction: column;
+}
+
 .message-description {
   font-size: clamp(1.125rem, 4vw, 1.5rem);
   font-weight: 400;
