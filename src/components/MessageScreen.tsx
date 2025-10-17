@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import type { Message } from '../types/message';
 import { BackgroundPattern } from './BackgroundPattern';
+import { RSVPForm } from './RSVPForm';
 import './MessageScreen.css';
 
 interface MessageScreenProps {
@@ -10,7 +11,6 @@ interface MessageScreenProps {
   currentIndex: number;
   totalMessages: number;
   onNext: () => void;
-  onRestart: () => void;
   isLast: boolean;
 }
 
@@ -21,7 +21,6 @@ export const MessageScreen = ({
   currentIndex,
   totalMessages,
   onNext,
-  onRestart,
   isLast
 }: MessageScreenProps) => {
   
@@ -119,7 +118,8 @@ export const MessageScreen = ({
     if (currentIndex === 5) return 'hearts'; // "Lo scopriremo insieme"
     if (currentIndex === 6) return 'stars'; // Data evento
     if (currentIndex === 7) return 'balloons'; // "Vi aspettiamo"
-    if (currentIndex === totalMessages - 1) return 'balloons'; // Ultimo messaggio
+    if (currentIndex === 8) return 'balloons'; // "E tu ci sarai?"
+    if (currentIndex === totalMessages - 1) return 'stars'; // Form step - stelle
     return 'neutral';
   };
 
@@ -127,7 +127,7 @@ export const MessageScreen = ({
 
   return (
     <div
-      className="message-screen"
+      className={`message-screen ${isLast ? 'has-form' : ''}`}
       style={{
         backgroundColor: message.backgroundColor,
         color: message.textColor
@@ -159,6 +159,21 @@ export const MessageScreen = ({
             {message.text}
           </motion.p>
           
+          {/* Mostra il form sullo step 10 (ultimo) */}
+          {isLast && (
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.4, duration: 0.5 }}
+              style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
+            >
+              <RSVPForm 
+                backgroundColor={message.backgroundColor}
+                textColor={message.textColor}
+              />
+            </motion.div>
+          )}
+          
           <motion.div 
             className="message-footer"
             initial={{ y: 20, opacity: 0 }}
@@ -183,35 +198,6 @@ export const MessageScreen = ({
                 Avanti
                 <span aria-hidden="true"> →</span>
               </motion.button>
-            )}
-            
-            {isLast && (
-              <motion.div
-                className="end-message-container"
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ delay: 0.5, type: "spring", stiffness: 200 }}
-              >
-                <p className="end-message" role="status">
-                  Non vediamo l'ora di vederti! 🎉
-                </p>
-                <motion.button
-                  onClick={onRestart}
-                  className="restart-button"
-                  aria-label="Ricomincia dall'inizio"
-                  style={{
-                    backgroundColor: message.textColor,
-                    color: message.backgroundColor
-                  }}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ delay: 1, duration: 0.3 }}
-                >
-                  <span aria-hidden="true">↻ </span>Ricomincia
-                </motion.button>
-              </motion.div>
             )}
           </motion.div>
         </motion.div>

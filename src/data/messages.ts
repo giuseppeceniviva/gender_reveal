@@ -74,5 +74,13 @@ export const messages: Message[] = [
     textColor: "#ffffff",
     fontFamily: 'Poppins',
     fontWeight: 700
+  },
+  {
+    id: 10,
+    text: "Conferma la tua presenza! 📝",
+    backgroundColor: "#6366f1", // Indigo moderno
+    textColor: "#ffffff",
+    fontFamily: 'Poppins',
+    fontWeight: 700
   }
 ];

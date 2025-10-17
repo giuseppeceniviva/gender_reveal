@@ -12,10 +12,6 @@ function App() {
     }
   }
 
-  const handleRestart = () => {
-    setCurrentIndex(0)
-  }
-
   // Supporto navigazione con tastiera (freccia destra/spazio)
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -40,7 +36,6 @@ function App() {
         currentIndex={currentIndex}
         totalMessages={messages.length}
         onNext={handleNext}
-        onRestart={handleRestart}
         isLast={currentIndex === messages.length - 1}
       />
     </div>

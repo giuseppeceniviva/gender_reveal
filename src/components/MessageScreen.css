@@ -18,6 +18,22 @@
   transition: background-color 0.5s ease;
 }
 
+/* Abilita scroll solo per l'ultimo step (con il form) */
+.message-screen.has-form {
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling su iOS */
+  overscroll-behavior: contain; /* Previene bounce eccessivo */
+}
+
+/* Su iOS, assicura che il padding bottom sia visibile */
+.message-screen.has-form::after {
+  content: '';
+  display: block;
+  height: 2rem;
+  width: 100%;
+}
+
 .message-content {
   display: flex;
   flex-direction: column;
@@ -28,6 +44,15 @@
   max-width: 600px;
   position: relative;
   z-index: 1;
+}
+
+/* Quando c'è il form, permetti al contenuto di espandersi oltre l'altezza dello schermo */
+.message-screen.has-form .message-content {
+  height: auto;
+  min-height: 100%;
+  justify-content: flex-start;
+  padding: 2rem 0;
+  gap: 2rem;
 }
 
 .message-text {
@@ -45,6 +70,13 @@
   hyphens: auto;
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
   letter-spacing: -0.01em;
+}
+
+/* Quando c'è il form, riduci le dimensioni del testo per fare spazio */
+.message-screen.has-form .message-text {
+  font-size: clamp(1.75rem, 6vw, 2.5rem);
+  padding: 1rem;
+  flex: 0;
 }
 
 .message-footer {
