@@ -54,6 +54,7 @@ export const messages: Message[] = [
   {
     id: 7,
     text: "Sabato 25 ottobre • ore 20:00 📅",
+    description: 'Sala feste "Goya", via Cerasolo (vicino Agorà)',
     backgroundColor: "#1e3a8a", // Blu navy
     textColor: "#ffffff",
     fontFamily: 'Quicksand',

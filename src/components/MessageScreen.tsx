@@ -159,6 +159,21 @@ export const MessageScreen = ({
             {message.text}
           </motion.p>
           
+          {/* Mostra la description se presente */}
+          {message.description && (
+            <motion.p 
+              className="message-description" 
+              style={{
+                fontFamily: message.fontFamily ? `"${message.fontFamily}", sans-serif` : undefined
+              }}
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
+            >
+              {message.description}
+            </motion.p>
+          )}
+          
           {/* Mostra il form sullo step 10 (ultimo) */}
           {isLast && (
             <motion.div
