@@ -11,9 +11,25 @@ interface RSVPFormProps {
 export const RSVPForm = ({ backgroundColor, textColor }: RSVPFormProps) => {
   const [state, handleSubmit] = useForm("xldpzndq");
   const [isAttending, setIsAttending] = useState<boolean | null>(null);
+  const [nome, setNome] = useState('');
+  const [numeroPersone, setNumeroPersone] = useState('');
 
   const handlePresenzaChange = (value: string) => {
     setIsAttending(value === 'Si');
+  };
+
+  // Verifica se il form è valido
+  const isFormValid = () => {
+    // Presenza deve essere selezionata
+    if (isAttending === null) return false;
+    
+    // Nome deve essere compilato
+    if (!nome.trim()) return false;
+    
+    // Se sta partecipando, numero persone è obbligatorio
+    if (isAttending === true && !numeroPersone) return false;
+    
+    return true;
   };
 
   if (state.succeeded) {
@@ -90,6 +106,8 @@ export const RSVPForm = ({ backgroundColor, textColor }: RSVPFormProps) => {
           required
           className="form-input"
           placeholder="Mario Rossi"
+          value={nome}
+          onChange={(e) => setNome(e.target.value)}
           style={{
             borderColor: textColor,
             color: textColor
@@ -117,6 +135,8 @@ export const RSVPForm = ({ backgroundColor, textColor }: RSVPFormProps) => {
           disabled={isAttending === false}
           className="form-input"
           placeholder="1"
+          value={numeroPersone}
+          onChange={(e) => setNumeroPersone(e.target.value)}
           style={{
             borderColor: textColor,
             color: textColor,
@@ -133,7 +153,7 @@ export const RSVPForm = ({ backgroundColor, textColor }: RSVPFormProps) => {
       {/* Pulsante Submit */}
       <motion.button 
         type="submit" 
-        disabled={state.submitting}
+        disabled={state.submitting || !isFormValid()}
         className="submit-button"
         style={{
           backgroundColor: textColor,
