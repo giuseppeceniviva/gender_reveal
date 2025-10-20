@@ -2,7 +2,7 @@
   position: relative;
   width: 100%;
   height: 100vh;
-  background-color: #FFC0CB; /* Rosa chiaro */
+  background-color: #ffc0cb; /* Rosa chiaro */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -33,7 +33,7 @@
 }
 
 .baby-message {
-  font-family: 'Quicksand', sans-serif;
+  font-family: "Quicksand", sans-serif;
   font-size: clamp(1.75rem, 5vw, 2.5rem);
   font-weight: 600;
   color: #333;
@@ -49,10 +49,10 @@
   z-index: 10;
   margin-top: 2rem;
   padding: 1rem 3rem;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 1.125rem;
   font-weight: 600;
-  color: #FFC0CB;
+  color: #ffc0cb;
   background-color: #333;
   border: none;
   border-radius: 50px;
@@ -68,7 +68,7 @@
 }
 
 .baby-welcome .next-button:focus {
-  outline: 3px solid #FF69B4;
+  outline: 3px solid #ff69b4;
   outline-offset: 4px;
 }
 
@@ -88,7 +88,8 @@
   }
 
   .baby-image {
-    max-width: 250px;
+    height: 70vh;
+    width: auto;
   }
 
   .baby-message {
@@ -108,7 +109,8 @@
   }
 
   .baby-image {
-    max-width: 200px;
+    height: 70vh;
+    width: auto;
   }
 
   .baby-message {
