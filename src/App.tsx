@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react'
 import { MessageScreen } from './components/MessageScreen'
+import BabyWelcome from './components/BabyWelcome'
 import { messages } from './data/messages'
 import './App.css'
+
+const reveal = true;
 
 function App() {
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -29,7 +32,7 @@ function App() {
 
   const currentMessage = messages[currentIndex]
 
-  return (
+  return !reveal ? (
     <div className="app">
       <MessageScreen
         message={currentMessage}
@@ -38,6 +41,10 @@ function App() {
         onNext={handleNext}
         isLast={currentIndex === messages.length - 1}
       />
+    </div>
+  ) : (
+    <div className="app">
+      <BabyWelcome />
     </div>
   )
 }
